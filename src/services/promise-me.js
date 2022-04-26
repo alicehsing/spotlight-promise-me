@@ -93,8 +93,8 @@ export function thenFinallyGetQuotes() {
  * TODO: Exercise 7: Call your function from exercise 5 using .then
  */
 export function thenAsyncGetQuotes() {
-  return asyncFinallyGetQuotes().then(() =>
-    console.log('Completed running asyncFinallyGetQuotes function.')
+  asyncFinallyGetQuotes().then((result) =>
+    console.log('Completed running asyncFinallyGetQuotes function.', result)
   );
 }
 
