@@ -73,14 +73,47 @@ export async function asyncFinallyGetQuotes() {
  * TODO: Exercise 6: use `fetch`, `.then`, `.catch`. and `.finally` to get the same data from exercise 5 while handling errors and calling console.log('All done!') upon completion
  */
 
+export function thenFinallyGetQuotes() {
+  console.log('1. Before .then fetch');
+  const result = fetch('https://futuramaapi.herokuapp.com/api/quotes/1')
+    .then((res) => res.json())
+    .then((result) => ({ quote: result[0], totalResults: result.length }))
+    .then((result) => {
+      console.log('2. .then fetch finish.');
+      return result;
+    })
+    .catch((error) => console.error('An error occurred!'))
+    .finally(() => console.log('All fetch completed!'));
+
+  console.log('3. After .then fetch');
+  return result;
+}
+
 /**
  * TODO: Exercise 7: Call your function from exercise 5 using .then
  */
-// export function thenAsyncGetQuotes() {
-//   return asyncFinallyGetQuotes().then(() =>
-//     console.log('Completed running asyncFinallyGetQuotes.')
-//   );
-// }
+export function thenAsyncGetQuotes() {
+  return asyncFinallyGetQuotes().then(() =>
+    console.log('Completed running asyncFinallyGetQuotes function.')
+  );
+}
+
 /**
  * TODO: Exercise 8: Call your function from exercise 6 using async/await
  */
+
+export async function asyncThenGetQuotes() {
+  console.log('1. Before .then fetch');
+  const result = await fetch('https://futuramaapi.herokuapp.com/api/quotes/1')
+    .then((res) => res.json())
+    .then((result) => {
+      console.log('2. .then fetch finish.');
+      return result;
+    })
+    .then((result) => ({ quote: result[0], totalResults: result.length }))
+    .catch((error) => console.error('An error occurred!'))
+    .finally(() => console.log('All fetch completed!'));
+
+  console.log('3. After .then fetch');
+  return result;
+}
